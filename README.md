@@ -15,7 +15,7 @@ The project have 2 serparated services:
 * Deployed with `Docker`
 * Test with `JUnit`, `Mockito`, embeeded database `zonky`
 
-  In order to return timeout message as response, we use `Async` call to third party to get voucher. If third party cannot handle in 30s, we set state of voucher as `TIMEOUT` then return timeout message as response. Then when got voucher from third party, we query state of the voucher, if it's `TIMEMOUT` we call `SmsService` to send voucher to user via SMS.
+  In order to return timeout message as response, we use `Async` call to third party to get voucher via REST. If third party cannot handle in 30s, we set state of voucher as `TIMEOUT` then return timeout message as response. Then when got voucher from third party, we query state of the voucher, if it's `TIMEMOUT` we call `SmsService` to send voucher to user via SMS.
   
   To ensure thread safe, we use a `lock` object to `syncronized` between the waiting in `controller` and the processing in `service`
   
@@ -149,3 +149,7 @@ curl --location --request GET 'http://localhost:8080/voucher?verification_id=6a6
     "de43fedf-1d2e-428f-b183-9266acb49f5f"
 ]
 ```
+
+## Not done in project
+* We can do the OTP service and voucher service as separated service, using it's own DB and communicate via REST
+* Lack of custom exception handler, currently using default hanlder of Spring, cannot see the exception message, can oly check in log
