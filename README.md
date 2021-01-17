@@ -152,4 +152,3 @@ curl --location --request GET 'http://localhost:8080/voucher?verification_id=6a6
 
 ## Not done in project
 * We can do the OTP service and voucher service as separated service, using it's own DB and communicate via REST
-* Lack of custom exception handler, currently using default hanlder of Spring, cannot see the exception message, can oly check in log
